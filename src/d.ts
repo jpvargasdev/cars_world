@@ -8,4 +8,5 @@ type DrawOptions = {
 	lineWidth?: number;
 	width?: number;
 	dash?: number[];
+	join?: CanvasLineJoin;
 };

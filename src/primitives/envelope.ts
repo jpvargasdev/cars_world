@@ -8,7 +8,7 @@ export class Envelope {
 	private skeleton: Segment;
 	public poly: Polygon;
 
-	constructor(skeleton: Segment, width: number, roundness: number = 1) {
+	constructor(skeleton: Segment, width: number, roundness = 1) {
 		this.skeleton = skeleton;
 		this.poly = this.generatePolygon(width, roundness);
 	}

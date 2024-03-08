@@ -117,12 +117,14 @@ export class Polygon {
 			stroke = "blue",
 			lineWidth = 2,
 			fillStyle = "rgba(0,0,255,0.3)",
+			join = "miter",
 		}: DrawOptions = {},
 	): void {
 		ctx.beginPath();
 		ctx.fillStyle = fillStyle;
 		ctx.strokeStyle = stroke;
 		ctx.lineWidth = lineWidth;
+		ctx.lineJoin = join;
 		ctx.moveTo(this.points[0].x, this.points[0].y);
 		for (let i = 1; i < this.points.length; i++) {
 			ctx.lineTo(this.points[i].x, this.points[i].y);

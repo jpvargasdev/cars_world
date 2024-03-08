@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "start": "webpack serve --open --mode development",
     "format": "npx @biomejs/biome format . --write",
-    "lint": "npx @biomejs/biome lint . --write",
+    "lint": "npx @biomejs/biome lint .",
     "check": "npx @biomejs/biome check ."
   },
   "author": "",

@@ -10,7 +10,12 @@ export class Point {
 
 	draw(
 		ctx: CanvasRenderingContext2D,
-		{ size = 18, color = "black", outline = false, fill = false }: DrawOptions = {},
+		{
+			size = 18,
+			color = "black",
+			outline = false,
+			fill = false,
+		}: DrawOptions = {},
 	): void {
 		const rad = size / 2;
 		ctx.beginPath();
