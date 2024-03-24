@@ -6,6 +6,8 @@ import { lerp, distance, add, scale } from "./math/utils";
 import { Graph } from "./math/graph";
 import { Tree } from "./items/tree";
 import { Building } from "./items/building";
+import { Stop } from "./markings/stop";
+import { Cross } from "./markings/cross";
 
 export class World {
 	graph: Graph;
@@ -19,6 +21,8 @@ export class World {
 	roadBorders: Segment[];
 	buildings: Building[];
 	trees: Tree[];
+	laneGuides: Segment[] = [];
+	markings: Stop[] | Cross[] = [];
 
 	constructor(
 		graph: Graph,
@@ -42,7 +46,26 @@ export class World {
 		this.buildings = [];
 		this.trees = [];
 
+		this.laneGuides.length = 0;
+		this.laneGuides.push(...this.getLaneGuides());
+
 		this.generate();
+	}
+
+	private getLaneGuides() {
+		const tmpEnvelopes: Envelope[] = [];
+		for (const seg of this.graph.segments) {
+			tmpEnvelopes.push(
+				new Envelope(
+					seg,
+					this.roadWidth / 2,
+					this.roadRoundness,
+				),
+			);
+		}
+
+		const segments = Polygon.union(tmpEnvelopes.map((e) => e.poly));
+		return segments;
 	}
 
 	generate(): void {
@@ -188,6 +211,9 @@ export class World {
 	draw(ctx: CanvasRenderingContext2D, viewPoint: Point): void {
 		for (const env of this.envelopes) {
 			env.draw(ctx, { fillStyle: "#BBB", stroke: "#BBB", lineWidth: 15 });
+		}
+		for (const marking of this.markings) {
+			marking.draw(ctx);
 		}
 		for (const seg of this.graph.segments) {
 			seg.draw(ctx, { color: "white", width: 4, dash: [10, 10] });

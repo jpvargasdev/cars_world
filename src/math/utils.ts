@@ -1,4 +1,5 @@
 import { Point } from "../primitives/point";
+import { Segment } from "../primitives/segment";
 
 /**
  * Returns the nearest point to a given location from an array of points, within a specified threshold.
@@ -19,6 +20,23 @@ export function getNearestPoint(
 		if (dist < minDist && dist < threshold) {
 			minDist = dist;
 			nearest = point;
+		}
+	}
+	return nearest;
+}
+
+export function getNearestSegment(
+	loc: Point,
+	segments: Segment[],
+	threshold: number = Number.MAX_SAFE_INTEGER,
+): Segment | null {
+	let minDist = Number.MAX_SAFE_INTEGER;
+	let nearest: Segment | null = null;
+	for (const seg of segments) {
+		const dist = seg.distanceToPoint(loc);
+		if (dist < minDist && dist < threshold) {
+			minDist = dist;
+			nearest = seg;
 		}
 	}
 	return nearest;
@@ -191,4 +209,8 @@ export function getFake3dPoint(point: Point, viewPoint: Point, height: number) {
 	const dist = distance(point, viewPoint);
 	const scaler = Math.atan(dist / 300) / (Math.PI / 2);
 	return add(point, scale(dir, height * scaler));
+}
+
+export function perpendicular(p: Point) {
+	return new Point(-p.y, p.x);
 }

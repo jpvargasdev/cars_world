@@ -9,11 +9,14 @@ export class Envelope {
 	public poly: Polygon;
 
 	constructor(skeleton: Segment, width: number, roundness = 1) {
+		if (roundness === 0) {
+			roundness =1
+		}
 		this.skeleton = skeleton;
 		this.poly = this.generatePolygon(width, roundness);
 	}
 
-	private generatePolygon(width: number, roundness: number): Polygon {
+	private generatePolygon(width: number, roundness = 1): Polygon {
 		const { p1, p2 } = this.skeleton;
 		const radius = width / 2;
 		const alpha = angle(substract(p1, p2));
@@ -25,6 +28,7 @@ export class Envelope {
 
 		const step = Math.PI / roundness;
 		const epsilon = step / 2;
+		
 		for (let i = alpha_ccw; i <= alpha_cw + epsilon; i += step) {
 			points.push(translate(p1, i, radius));
 		}

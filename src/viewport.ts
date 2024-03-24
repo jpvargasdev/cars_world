@@ -18,7 +18,7 @@ export class Viewport {
 	constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
 		this.canvas = canvas;
 		this.ctx = ctx;
-		this.zoom = 1.0;
+		this.zoom = 2.0;
 
 		this.center = new Point(canvas.width / 2, canvas.height / 2);
 		this.offset = scale(this.center, -1);
