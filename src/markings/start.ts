@@ -1,7 +1,7 @@
 import { angle } from "../math/utils";
 import { Point } from "../primitives/point";
 import { Marking } from "./marking";
-import img from "../assets/car.png";
+import car from '../assets/car.png'
 
 export class Start extends Marking {
   img: HTMLImageElement
@@ -9,8 +9,8 @@ export class Start extends Marking {
   constructor(center: Point, directionVector: Point, width: number, height: number) {
     super(center, directionVector, width, height);
 
-    this.img = new Image()
-    this.img.src = img
+    this.img = new Image();
+    this.img.src = car 
   }
 
   draw(ctx: CanvasRenderingContext2D) {

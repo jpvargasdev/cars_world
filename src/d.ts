@@ -10,3 +10,5 @@ type DrawOptions = {
 	dash?: number[];
 	join?: CanvasLineJoin;
 };
+
+declare module '*.png';
