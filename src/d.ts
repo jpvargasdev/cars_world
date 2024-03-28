@@ -9,6 +9,7 @@ type DrawOptions = {
 	width?: number;
 	dash?: number[];
 	join?: CanvasLineJoin;
+	cap?: CanvasLineCap;
 };
 
-declare module '*.png';
+declare module "*.png";

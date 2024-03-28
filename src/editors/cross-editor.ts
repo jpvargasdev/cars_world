@@ -6,16 +6,16 @@ import { MarkingEditor } from "./marking-editor";
 import { Marking } from "../markings/marking";
 
 export class CrossEditor extends MarkingEditor {
-  constructor(viewport: Viewport, world: World) {
-    super(viewport, world, world.graph.segments);
-  }
+	constructor(viewport: Viewport, world: World) {
+		super(viewport, world, world.graph.segments);
+	}
 
-  createMarking(center: Point, directionVector: Point): Marking {
-    return new Cross(
-      center,
-      directionVector,
-      this.world.roadWidth,
-      this.world.roadWidth / 2
-    );
-  }
+	createMarking(center: Point, directionVector: Point): Marking {
+		return new Cross(
+			center,
+			directionVector,
+			this.world.roadWidth,
+			this.world.roadWidth / 2,
+		);
+	}
 }

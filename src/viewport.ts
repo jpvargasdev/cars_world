@@ -15,13 +15,17 @@ export class Viewport {
 	};
 	isCommandKeyPressed: boolean;
 
-	constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+	constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, zoom = 2.0, offset?: Point) {
 		this.canvas = canvas;
 		this.ctx = ctx;
-		this.zoom = 2.0;
+		this.zoom = zoom;
 
 		this.center = new Point(canvas.width / 2, canvas.height / 2);
-		this.offset = scale(this.center, -1);
+		if (offset) {
+			this.offset = offset;
+		} else {
+			this.offset = scale(this.center, -1);
+		}
 
 		this.drag = {
 			start: new Point(0, 0),

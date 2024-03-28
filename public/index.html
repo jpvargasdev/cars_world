@@ -7,17 +7,29 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>World Editor</h1>
+    <h1 id="title">World Editor</h1>
     <canvas id="canvas"></canvas>
     <div id="controls">
       <button id="btn-dispose">🗑️</button>
       <button id="btn-save">💾</button>
-      &nbsp;
-      <button id="graphBtn">🌎</button>
-      <button id="stopBtn">🛑</button>
-      <button id="crossBtn">🚶🏼‍♂️</button>
-      <button id="startBtn">🚗</button>
+      <label for="fileInput" class="file-input-label">
+        📂
+        <input
+          type="file"
+          id="fileInput"
+          accept=".world"
+        />
+      </label>
 
+      &nbsp;
+      <button id="graphBtn">🌐</button>
+      <button id="stopBtn" >🛑</button>
+      <button id="yieldBtn" >⚠️</button>
+      <button id="crossingBtn" >🚶</button>
+      <button id="parkingBtn" >🅿️</button>
+      <button id="lightBtn" >🚦</button>
+      <button id="startBtn" >🚙</button>
+      <button id="targetBtn" >🎯</button>
     </div>
   </body>
 </html>

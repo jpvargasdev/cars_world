@@ -5,18 +5,31 @@ import { Segment } from "./segment";
 import { angle, substract, translate } from "../math/utils";
 
 export class Envelope {
-	private skeleton: Segment;
-	public poly: Polygon;
+	skeleton: Segment | undefined;
+	poly: Polygon | undefined;
 
-	constructor(skeleton: Segment, width: number, roundness = 1) {
-		if (roundness === 0) {
-			roundness =1
+	constructor(skeleton?: Segment, width?: number, roundness = 1) {
+		if (skeleton && width) {
+			if (roundness === 0) {
+				roundness = 1;
+			}
+			this.skeleton = skeleton;
+			this.poly = this.generatePolygon(width, roundness);
 		}
-		this.skeleton = skeleton;
-		this.poly = this.generatePolygon(width, roundness);
 	}
 
-	private generatePolygon(width: number, roundness = 1): Polygon {
+	static load(info: Envelope): Envelope {
+		const env = new Envelope();
+		if (info.skeleton) {
+			env.skeleton = new Segment(info.skeleton.p1, info.skeleton.p2);
+			env.poly = Polygon.load(info.poly!);
+		}
+		return env;
+	}
+
+	private generatePolygon(width: number, roundness = 1): Polygon | undefined {
+		if (!this.skeleton) return undefined;
+
 		const { p1, p2 } = this.skeleton;
 		const radius = width / 2;
 		const alpha = angle(substract(p1, p2));
@@ -28,7 +41,7 @@ export class Envelope {
 
 		const step = Math.PI / roundness;
 		const epsilon = step / 2;
-		
+
 		for (let i = alpha_ccw; i <= alpha_cw + epsilon; i += step) {
 			points.push(translate(p1, i, radius));
 		}
@@ -40,6 +53,6 @@ export class Envelope {
 	}
 
 	draw(ctx: CanvasRenderingContext2D, options: DrawOptions): void {
-		this.poly.draw(ctx, options);
+		this.poly!.draw(ctx, options);
 	}
 }

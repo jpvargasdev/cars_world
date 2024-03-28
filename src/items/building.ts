@@ -12,6 +12,10 @@ export class Building {
 		this.height = height;
 	}
 
+	static load(info: Building): Building {
+		return new Building(Polygon.load(info.base), info.height);
+	}
+
 	draw(ctx: CanvasRenderingContext2D, viewPoint: Point): void {
 		const topPoints = this.base.points.map((p) =>
 			getFake3dPoint(p, viewPoint, this.height * 0.6),
