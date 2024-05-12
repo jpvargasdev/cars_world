@@ -6,7 +6,7 @@ import { Polygon } from "../primitives/polygon";
 import { Segment } from "../primitives/segment";
 
 export class Marking {
-  type: string;
+	type: string;
 	center: Point;
 	directionVector: Point;
 	width: number;
@@ -19,9 +19,9 @@ export class Marking {
 		directionVector: Point,
 		width: number,
 		height: number,
-    type: "start" | "stop" | "cross" | "parking" | "yield" | "target" | "light"
+		type: "start" | "stop" | "cross" | "parking" | "yield" | "target" | "light",
 	) {
-    this.type = type;
+		this.type = type;
 		this.center = center;
 		this.directionVector = directionVector;
 		this.width = width;

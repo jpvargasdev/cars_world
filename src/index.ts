@@ -66,21 +66,21 @@ if (yieldBtn) {
 }
 
 if (input) {
-	input.addEventListener("change", load)
+	input.addEventListener("change", load);
 }
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 canvas.width = 800;
 canvas.height = 800;
 
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener("DOMContentLoaded", (event) => {
 	resizeCanvas();
 
-	window.addEventListener('resize', resizeCanvas);
+	window.addEventListener("resize", resizeCanvas);
 
 	function resizeCanvas() {
-			canvas.width = window.innerWidth * 0.8; // Set canvas width to 80% of the viewport width
-			canvas.height = window.innerHeight * 0.8; // Set canvas height to 80% of the viewport height
+		canvas.width = window.innerWidth * 0.8; // Set canvas width to 80% of the viewport width
+		canvas.height = window.innerHeight * 0.8; // Set canvas height to 80% of the viewport height
 	}
 });
 
@@ -176,14 +176,12 @@ function save() {
 	world.offset = viewport.offset;
 
 	const fileName = window.prompt("Enter file name:", "");
-	if (fileName) { 
+	if (fileName) {
 		const element = document.createElement("a");
 		element.setAttribute(
 			"href",
 			"data:application/json;charset=utf-8," +
-				encodeURIComponent(
-					JSON.stringify(world)
-				)
+				encodeURIComponent(JSON.stringify(world)),
 		);
 		element.setAttribute("download", `${fileName}.world`);
 		element.click();
@@ -196,26 +194,26 @@ function load(event: any) {
 	const file = event.target.files[0];
 
 	if (!file) {
-			alert("No file selected");
-			return;
+		alert("No file selected");
+		return;
 	}
 
 	const reader = new FileReader();
 	reader.readAsText(file);
-	reader.onload = evt => {
-			const fileContent = evt.target!.result;
-			const jsonData = JSON.parse(String(fileContent));
-			world = World.load(jsonData);
+	reader.onload = (evt) => {
+		const fileContent = evt.target!.result;
+		const jsonData = JSON.parse(String(fileContent));
+		world = World.load(jsonData);
 
-			// Get the file name and append it to the title
-			const fileName = file.name;
-			if (title) {
-				const worldTitle = `World Editor - ${fileName}`;
-				world.title = worldTitle;
-			}
+		// Get the file name and append it to the title
+		const fileName = file.name;
+		if (title) {
+			const worldTitle = `World Editor - ${fileName}`;
+			world.title = worldTitle;
+		}
 
-			localStorage.setItem("world", JSON.stringify(world));
-			location.reload()
+		localStorage.setItem("world", JSON.stringify(world));
+		location.reload();
 	};
 }
 

@@ -1,4 +1,3 @@
-
 import { Point } from "../primitives/point";
 import { Cross } from "./cross";
 import { Light } from "./light";
@@ -29,8 +28,8 @@ export const getMarking = (info: Marking) => {
 		case "target":
 			return new Target(point, direction, width, height);
 		case "light":
-			return new Light(point, direction, width, height);		
+			return new Light(point, direction, width, height);
 		default:
-			return new Cross(point, direction, width, height);		
+			return new Cross(point, direction, width, height);
 	}
-}
+};

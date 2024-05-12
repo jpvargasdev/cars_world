@@ -79,7 +79,7 @@ export class World {
 		world.buildings = info.buildings.map((b) => Building.load(b));
 		world.trees = info.trees.map((t) => new Tree(t.center, info.treeSize));
 		world.laneGuides = info.laneGuides.map((g) => new Segment(g.p1, g.p2));
-		world.markings = info.markings.map((m) =>  getMarking(m))
+		world.markings = info.markings.map((m) => getMarking(m));
 		world.zoom = info.zoom;
 		world.offset = info.offset;
 		world.title = info.title;
@@ -99,7 +99,7 @@ export class World {
 				new Envelope(seg, this.roadWidth / 2, this.roadRoundness),
 			);
 		}
-		
+
 		const segments = Polygon.union(tmpEnvelopes.map((e) => e.poly!));
 		return segments;
 	}
@@ -116,7 +116,7 @@ export class World {
 		this.buildings = this.generateBuildings();
 		this.trees = this.generateTrees();
 		this.laneGuides.length = 0;
-    this.laneGuides.push(...this.generateLaneGuides());
+		this.laneGuides.push(...this.generateLaneGuides());
 	}
 
 	private getIntersections(): Point[] {
